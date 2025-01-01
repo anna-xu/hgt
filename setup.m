@@ -38,3 +38,6 @@ allSubData.FeedbackCondition=categorical(abs(allSubData.Feedback - 1));
 allSubData.zBorg=zscoreNan(allSubData.Borg);
 allSubData.zTired=zscoreNan(allSubData.Tired);
 allSubData.zConfidence=zscoreNan(allSubData.Confidence);
+
+% 0 = first condition is positive
+allSubData.ConditionOrder = categorical(mod(str2double(string(allSubData.SubID)),2));

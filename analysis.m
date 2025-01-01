@@ -1,4 +1,4 @@
-setup;
+setup; % note: negative feedback is coded as 1
 
 %% Effort output (grip force) varies with both effort demands and time on task
 
@@ -59,8 +59,14 @@ fatigue_effort_fb = fitlme(allSubData,...
 % figures
 
 feedback_figure('Fatigue', fatigue_time_fb, allSubData, 'Time')
-
 feedback_figure('Perceived Exertion', borg_effort_fb, allSubData, 'Grip Force')
+
+% Table S4
+
+fatigue_time_conditionOrder = fitlme(allSubData,...
+    'Tired ~ 1 + FeedbackCondition * zTrialNum_Session + FeedbackCondition * ConditionOrder + zAbsEffort * zTrialNum_Session + zConfidence + zBorg + (1 + FeedbackCondition * zTrialNum_Session + FeedbackCondition * ConditionOrder + zAbsEffort * zTrialNum_Session + zConfidence + zBorg |SubID)',...
+    'FitMethod','REML') ;
+[~,~,fatigue_time_conditionOrder_results] = fixedEffects(fatigue_time_conditionOrder, 'DFmethod', 'satterthwaite')
 
 %% Negative feedback increases the sensitivity of effort output to task difficulty
 
@@ -69,6 +75,12 @@ effort_feedback_model = fitlme(allSubData,...,
     'AbsEffort ~ 1 + FeedbackCondition * zCenterBox * zTrialNum_Session + (1 + FeedbackCondition * zCenterBox * zTrialNum_Session|SubID)',...
     'FitMethod','REML') ;
 [~,~,effort_feedback_model_results] = fixedEffects(effort_feedback_model, 'DFmethod', 'satterthwaite')
+
+% Table S5
+effort_fb_conditionOrder = fitlme(allSubData,...,
+    'AbsEffort ~ 1 + FeedbackCondition * zCenterBox*zTrialNum_Session + FeedbackCondition*ConditionOrder + (1 +  FeedbackCondition * zCenterBox*zTrialNum_Session + FeedbackCondition*ConditionOrder|SubID)',...
+    'FitMethod','REML') ;
+[~,~,effort_fb_conditionOrder_results] = fixedEffects(effort_fb_conditionOrder, 'DFmethod', 'satterthwaite')
 
 % figures
 
