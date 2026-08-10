@@ -1,3 +1,5 @@
+**NOTE (08/10/2026):** The code and data will need to be updated again to reflect the latest version of manuscript. 
+
 This repo contains data & analysis code for Xu et al., 2024, "Do you ever get tired of being wrong? The unique impact of feedback on subjective experiences of effort"
 
 * Preprocessed data can be found in the folder `data`.
