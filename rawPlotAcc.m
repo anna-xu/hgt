@@ -7,7 +7,7 @@ figure(1)
 % bin
 %targetBins = discretize(posData.CorrAccMean, 5);
 %posData.binnedTargets = targetBins;
-[bin, binValues] = discretize(posData.CorrAccMean, 5);
+[bin, binValues] = discretize(posData.MeanTrialAcc, 5);
 posData.binnedTargets = bin;
 % group stats
 pos_binEffort_target=grpstats(posData,{'binnedTargets'},{'mean','std'},'DataVars',{var});
@@ -24,7 +24,7 @@ hold on
 % now same for negative feedback
 %targetBins = discretize(negData.CorrAccMean, 5);
 %negData.binnedTargets = targetBins;
-[bin, binValues] = discretize(negData.CorrAccMean, 5);
+[bin, binValues] = discretize(negData.MeanTrialAcc, 5);
 negData.binnedTargets = bin;
 neg_binEffort_target=grpstats(negData,{'binnedTargets'},{'mean','std'},'DataVars',{var});
 neg_binEffort_target_subj=grpstats(negData,{'SubID','binnedTargets'},{'mean'},'DataVars',{var}); % subject and bin level 
@@ -47,3 +47,7 @@ hold on
 xlim([0 6])
 set(gca, 'xtick', [1:5], 'xticklabel', binValues(2:6)); 
 end 
+
+% figure()
+% bar(acc_stats.FeedbackCondition, acc_stats.mean_CorrAccMean)
+% xlabel('Feedback Condition')
